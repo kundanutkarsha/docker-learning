@@ -1,1 +1,2 @@
-print("Hello from version 3!")
+print("Hello from version 4!")
+raise Exception("Something went wrong!")

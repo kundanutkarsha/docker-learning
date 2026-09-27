@@ -13,3 +13,6 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t my-first-app .
+
+      - name: Run container
+        run:  docker run --rm my-first-app

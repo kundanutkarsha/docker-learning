@@ -19,10 +19,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t ghcr.io/kundanutkarsha/docker-learning:latest .
+        run: docker build -t ghcr.io/kundanutkarsha/docker-learning:latest -t ghcr.io/kundanutkarsha/docker-learning:${{ github.sha }} .
 
       - name: Push Docker image
-        run: docker push ghcr.io/kundanutkarsha/docker-learning:latest
+        run: |
+         docker push ghcr.io/kundanutkarsha/docker-learning:latest
+         docker push ghcr.io/kundanutkarsha/docker-learning:${{ github.sha }}
  
       - name: Run container
         run: |

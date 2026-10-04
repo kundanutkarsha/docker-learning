@@ -1,6 +1,10 @@
-FROM python:3.12-slim
+FROM python:3.12-alpine
 
 WORKDIR /app
+
+RUN adduser -D appuser
+
+USER appuser
 
 COPY app.py .
 

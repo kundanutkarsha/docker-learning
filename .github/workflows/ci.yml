@@ -13,6 +13,10 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t my-first-app .
-
+     
       - name: Run container
-        run:  docker run --rm my-first-app
+        run: |
+          docker run -d --name my-first-app-test -p 8000:8000 my-first-app
+          sleep 5
+          curl http://localhost:8000
+          docker rm -f my-first-app-test

@@ -11,12 +11,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build Docker image
-        run: docker build -t my-first-app .
-     
+        run: docker build -t ghcr.io/kundanutkarsha/docker-learning:latest .
+
+      - name: Push Docker image
+        run: docker push ghcr.io/kundanutkarsha/docker-learning:latest
+ 
       - name: Run container
         run: |
-          docker run -d --name my-first-app-test -p 8000:8000 my-first-app
+          docker run -d --name my-first-app-test -p 8000:8000 ghcr.io/kundanutkarsha/docker-learning:latest
           sleep 5
           curl http://localhost:8000
           docker rm -f my-first-app-test

@@ -1,1 +1,5 @@
-print("Hello from version 4!")
+import os
+
+message = os.getenv("MESSAGE", "Hello from Docker!")
+
+print(message)
